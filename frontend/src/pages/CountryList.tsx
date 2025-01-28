@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import CountryCard from "./CountryCard";
 
 interface Country {
   code: string;
@@ -13,7 +13,7 @@ const CountryList: React.FC = () => {
   useEffect(() => {
     const fetchCountries = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/countries");
+        const response = await axios.get("https://date.nager.at/api/v3/AvailableCountries");
         setCountries(response.data);
       } catch (error) {
         console.error("Error fetching countries:", error);
@@ -25,18 +25,11 @@ const CountryList: React.FC = () => {
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">Available Countries</h1>
-      <ul className="list-disc pl-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {countries.map((country) => (
-          <li key={country.code} className="mb-2">
-            <Link
-              to={`/country/${country.code}`}
-              className="text-blue-500 hover:underline"
-            >
-              {country.name}
-            </Link>
-          </li>
+          <CountryCard key={country.code} code={country.code} name={country.name} />
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
