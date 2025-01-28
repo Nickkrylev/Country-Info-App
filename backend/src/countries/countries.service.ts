@@ -32,7 +32,7 @@ export class CountriesService {
       ]);
 
       const countryDetails = countryInfo.data;
-      console.log(countryDetails);
+    
       const population = populationData.data.data.find((c) => c.country === countryDetails.commonName) ?.populationCounts || [];
       const flagUrl = flagData.data.data.find((c) => c.name === countryDetails.commonName,)?.flag;
 
